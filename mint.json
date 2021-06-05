@@ -1,0 +1,32 @@
+{
+  "name": "dicey",
+  "application": {
+    "head": "assets/head.html",
+    "title": "dicey",
+    "name": "dicey",
+    "icon": "assets/favicon.png",
+    "display": "standalone",
+    "orientation": "portrait",
+    "meta": {
+      "viewport": "width=device-width, initial-scale=1, user-scalable=no",
+      "charset": "utf-8"
+    }
+  },
+  "external": {
+    "stylesheets": [
+      "assets/style.css"
+    ]
+  },
+  "source-directories": [
+    "source"
+  ],
+  "test-directories": [
+    "tests"
+  ],
+  "dependencies": {
+    "mint-ui": {
+      "repository": "https://github.com/mint-lang/mint-ui",
+      "constraint": "1.0.0 <= v < 2.0.0"
+    }
+  }
+}

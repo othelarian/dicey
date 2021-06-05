@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+}
+
+.diceshow {
+  width: 60%;
+  max-width: 60%;
+}
+
+.diceshow tr td:nth-child(1),
+.diceshow tr td:nth-child(2) {
+  width: 30px;
+}
+
+.diceshow tr td:nth-child(1) button > div,
+.diceshow tr td:nth-child(2) button > div {
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+}
+
+.diceshow tr td:nth-child(5) {
+  width: 70px;
+}
