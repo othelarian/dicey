@@ -1,26 +1,26 @@
 enum DieType {
-  D4
-  D6
-  D8
+  Dn(Number)
 }
 
 module Randomizer {
   fun dieToStr (dt : DieType) : String { case (dt) {
-    DieType::D4 => "d4"
-    DieType::D6 => "d6"
-    DieType::D8 => "d8"
+    DieType::Dn n => "d" + Number.toString(n)
   }}
 
   fun dieToValue (dt : DieType) : String { case (dt) {
-    DieType::D4 => Number.toString(randBase(4))
-    DieType::D6 => Number.toString(randBase(6))
-    DieType::D8 => Number.toString(randBase(8))
+    DieType::Dn n => Number.toString(randBase(n))
   }}
 
   fun newKey : String {
-    Debug.log("new key")
+    Array.range(0, 14)
+      |> Array.reduce("", (r : String, i : Number) { r + randy()})
   } where {
-    stock = "abcdefghijkmlnopqrtsuvwxyz0312456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    stock = "abcdefghijkmlnopqrtsuvwxyz0312456789ABCDEFGHIJKLMNOPQRSTUVWXYZ;?,/:-_&()[]{}"
+    randy = () {
+      String.toArray(stock)
+        |> Array.at(Math.floor(Math.random() * String.size(stock)))
+        |> Maybe.withDefault("")
+    }
   }
 
   fun randBase (factor : Number) : Number {

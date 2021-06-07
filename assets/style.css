@@ -2,22 +2,56 @@ body {
   margin: 0;
 }
 
-.diceshow {
-  width: 60%;
-  max-width: 60%;
+@keyframes newres {
+  from { background: #3f3; }
+  to { background: none; }
 }
 
-.diceshow tr td:nth-child(1),
-.diceshow tr td:nth-child(2) {
+.new-res, .new-res-alt {
+  animation: newres 2s;
+}
+
+
+
+.showroll td {
+  background: #aaa2;
+  padding: 4px;
+}
+
+.showroll tr td:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.showroll tr td:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.showroll .label {
+  font-weight: bold;
+}
+
+.showroll .roll-btn {
+  width: 70px;
+  text-align: center;
+}
+
+.showroll .updn-btn {
   width: 30px;
 }
 
-.diceshow tr td:nth-child(1) button > div,
-.diceshow tr td:nth-child(2) button > div {
-  padding-left: 0.8em;
-  padding-right: 0.8em;
+.showroll .updn-btn button > div {
+  padding-left: 0.7em;
+  padding-right: 0.7em;
 }
 
-.diceshow tr td:nth-child(5) {
-  width: 70px;
+
+
+.classic {
+  width: 40%;
+  max-width: 40%;
+}
+
+.expert {
+  width: 60%;
+  max-width: 60%;
 }
