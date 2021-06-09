@@ -5,9 +5,15 @@ record LineInfo {
 }
 
 component RollLine {
-  connect App exposing { btnSize, mode, order }
+  connect App exposing { btnSize, mode, order, setList }
 
   property info : LineInfo
+
+  get orderSize {
+    Map.get(setList, order)
+      |> Maybe.withDefault([])
+      |> Array.size()
+  }
 
   fun rollin (e : Html.Event) {
     sequence {
@@ -32,7 +38,7 @@ component RollLine {
             <Ui.Button onClick={App.lineMove(info.id, MoveDir::Up)}
               size={btnSize} iconBefore={Ui.Icons:ARROW_UP}/>
           } </td>
-          <td class="updn-btn"> if (info.id != Array.size(order) - 1) {
+          <td class="updn-btn"> if (info.id != (orderSize - 1)) {
             <Ui.Button onClick={App.lineMove(info.id, MoveDir::Down)}
               size={btnSize} iconBefore={Ui.Icons:ARROW_DOWN}/>
           } </td>

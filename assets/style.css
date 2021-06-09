@@ -45,13 +45,41 @@ body {
 }
 
 
+.showroll {
+  width: 60%;
+}
 
 .classic {
-  width: 40%;
-  max-width: 40%;
+  width: 60%;
+  max-width: 700px;
 }
 
 .expert {
-  width: 60%;
-  max-width: 60%;
+  max-width: 780px;
+}
+
+@media (max-width: 850px) {
+  .showroll {
+    width: 80%;
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 425px) {
+  .showroll {
+    width: 95%;
+    max-width: 95%;
+  }
+}
+
+
+
+.opt-path {
+  width: calc(100% - 70px);
+  height: 20px;
+  margin-right: 10px;
+}
+
+.opt-copy > button {
+  max-width: 50px;
 }

@@ -17,12 +17,22 @@ enum MoveDir {
   Down
 }
 
+record SaveStatus {
+  storage: Bool,
+  path: Bool
+}
+
 store App {
   state lines : Map(String, DieLine) = Map.empty()
   state mode = AppMode::Classic
-  state order : Array(String) = []
+  state order : Map(String, Array(String)) = Map.empty()
+  state setList = "basic"
 
   state btnSize = Ui.Size::Px(14)
+
+  /* Options states */
+  state diceSet = false
+  state saveStatus = SaveStatus(false, false)
 
   fun defDie { DieLine.create(DieType::Dn(6)) }
 
@@ -46,12 +56,22 @@ store App {
         |> Map.set("l6", DieLine.create(DieType::Dn(20)))
       next { lines = b }
       /* next { order = ["start"] } */
-      next { order = ["l1", "l2", "l3", "l4", "l5", "l6"] }
+      o = Map.empty()
+        |> Map.set("basic", ["l1", "l2", "l3", "l4", "l5", "l6"])
+      next { order = o }
+      /*  */
+      /*  */
+      /*  */
     }
   }
 
   fun lineMove (id : Number, dir : MoveDir, e : Html.Event) {
-    next { order = Array.swap(id, id + mov(dir), order) }
+    try {
+      no = Map.get(setList, order)
+        |> Maybe.withDefault([])
+        |> Array.swap(id, id + mov(dir))
+      next { order = Map.set(setList, no, order) }
+    }
   } where {
     mov = (dir : MoveDir) { case (dir) {
       MoveDir::Up => -1
@@ -66,7 +86,7 @@ store App {
     }
   } where {
     newCurr = (key : String) { case (Map.get(key, lines)) {
-      Maybe::Nothing => App.defDie()
+      Maybe::Nothing => defDie()
       Maybe::Just v => { v | curr = Maybe.just(Randomizer.dieToValue(v.dieType)) }
     }}
   }
